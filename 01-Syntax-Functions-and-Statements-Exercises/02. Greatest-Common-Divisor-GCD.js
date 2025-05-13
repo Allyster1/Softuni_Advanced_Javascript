@@ -1,8 +1,8 @@
 function greatestDivisor(a, b) {
   let min = a < b ? a : b;
-  for (; min > 0; min--) {
-    if (a % min === 0 && b % min === 0) {
-      console.log(min);
+  for (let i = min; min > 0; min--) {
+    if (a % i === 0 && b % i === 0) {
+      console.log(i);
       break;
     }
   }
