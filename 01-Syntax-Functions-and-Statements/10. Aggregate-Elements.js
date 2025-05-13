@@ -1,10 +1,10 @@
 function aggregate(array) {
   const sum = array.reduce((acc, curr) => acc + curr, 0);
-  const sumInverse = array.reduce((acc, curr) => acc + 1 / curr, 0);
+  const inversed = array.reduce((acc, curr) => acc + 1 / curr, 0);
   const concat = array.reduce((acc, curr) => acc + curr.toString(), "");
 
   console.log(sum);
-  console.log(sumInverse);
+  console.log(inversed);
   console.log(concat);
 }
 
