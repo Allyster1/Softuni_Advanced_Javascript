@@ -1,14 +1,12 @@
 function previousDay(year, month, day) {
-  const d = new Date(year, month - 1, day);
+  const currentDate = new Date(year, month - 1, day - 1);
 
-  d.setDate(d.getDate() - 1);
-
-  const y = d.getFullYear();
-  const m = d.getMonth() + 1;
-  const dd = d.getDate();
-
-  console.log(`${y}-${m}-${dd}`);
+  console.log(
+    `${currentDate.getFullYear()}-${
+      currentDate.getMonth() + 1
+    }-${currentDate.getDate()}`
+  );
 }
 
 previousDay(2016, 9, 30);
-previousDay(2015, 5, 10);
+// previousDay(2015, 5, 10);
