@@ -1,6 +1,6 @@
 function processOdd(array) {
   let processedArray = array
-    .filter((number, element) => element % 2 !== 0)
+    .filter((number, index) => index % 2 !== 0)
     .map((x) => x * 2)
     .reverse()
     .join(" ");
