@@ -1,5 +1,5 @@
 function calculateOperations(...commands) {
-  let inputNumber = commands.shift();
+  let inputNumber = Number(commands.shift());
 
   for (let command of commands) {
     if (command === "chop") {
