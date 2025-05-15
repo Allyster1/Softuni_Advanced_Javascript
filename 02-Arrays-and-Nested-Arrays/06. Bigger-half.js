@@ -1,13 +1,7 @@
-function printBiggerHalf(array) {
-  const sorted = array.sort((a, b) => a - b);
-  const half = Math.floor(sorted.length / 2);
-  const left = sorted.slice(0, half);
-  const right = sorted.slice(half);
-
-  const sum = (arrayInput) =>
-    arrayInput.reduce((acc, current) => acc + current, 0);
-
-  const result = sum(left) >= sum(right) ? left : right;
+function printBiggerHalf(arr) {
+  arr.sort((a, b) => a - b);
+  const middle = Math.floor(arr.length / 2);
+  const result = arr.slice(middle);
 
   console.log(result);
 }
