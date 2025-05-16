@@ -4,7 +4,8 @@ function printData(array, step) {
   for (let i = 0; i < array.length; i += step) {
     result.push(array[i]);
   }
-  console.log(result);
+
+  return result;
 }
 
 //printData(["5", "20", "31", "4", "20"], 2);
