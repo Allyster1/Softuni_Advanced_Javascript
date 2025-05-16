@@ -1,10 +1,9 @@
-function printProduct(array, ...products) {
-  const startIndex = array.indexOf(products.shift());
-  const endIndex = array.indexOf(products.pop());
+function printProduct(array, firstProduct, lastProduct) {
+  let startIndex = array.indexOf(firstProduct);
+  let endIndex = array.indexOf(lastProduct) + 1;
 
-  let slicedArray = array.slice(startIndex, endIndex + 1);
-
-  console.log(slicedArray);
+  let slicedArray = array.slice(startIndex, endIndex);
+  return slicedArray;
 }
 
 printProduct(
