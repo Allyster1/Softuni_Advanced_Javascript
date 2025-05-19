@@ -1,11 +1,11 @@
 function addOrRemove(array) {
   let result = [];
 
-  array.reduce((acc, current) => {
+  array.reduce((acc, command) => {
     acc += 1;
-    if (current === "add") {
+    if (command === "add") {
       result.push(acc);
-    } else if (current === "remove") {
+    } else if (command === "remove") {
       result.pop();
     }
 
