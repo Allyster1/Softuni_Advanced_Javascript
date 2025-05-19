@@ -1,11 +1,11 @@
 function sortNames(array) {
   const sorted = array.sort((a, b) => a.localeCompare(b));
+  counter = 1;
 
-  for (let i = 0; i < sorted.length; i++) {
-    let element = array[i];
-
-    console.log(`${i + 1}.${element}`);
-  }
+  sorted.forEach((element) => {
+    console.log(`${counter}.${element}`);
+    counter++;
+  });
 }
 
 sortNames(["John", "Bob", "Christina", "Ema"]);
