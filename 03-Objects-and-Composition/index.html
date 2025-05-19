@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FromJSONToHTMLTable</title>
+    <style>
+      table,
+      th {
+        border: groove;
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid black;
+      }
+      td,
+      th {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script>
+      function fromJSONToHTMLTable(json) {
+        let arr = JSON.parse(json);
+        let outputArr = ["<table>"];
+
+        let headers = Object.keys(arr[0]);
+        outputArr.push(makeKeyRow(headers));
+
+        arr.forEach((obj) => outputArr.push(makeValueRow(obj, headers)));
+
+        outputArr.push("</table>");
+
+        function makeKeyRow(headers) {
+          let headerCells = headers.map(
+            (header) => `<th>${escapeHtml(header)}</th>`
+          );
+          return `   <tr>${headerCells.join("")}</tr>`;
+        }
+
+        function makeValueRow(obj, headers) {
+          let cells = headers.map(
+            (header) => `<td>${escapeHtml(obj[header])}</td>`
+          );
+          return `   <tr>${cells.join("")}</tr>`;
+        }
+
+        function escapeHtml(value) {
+          if (typeof value === "string") {
+            return value
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#039;");
+          }
+          return value;
+        }
+
+        console.log(outputArr.join("\n"));
+      }
+
+      window.onload = function () {
+        let json = `[{"Name":"Stamat","Score":5.5},{"Name":"Rumen", "Score":6}]`;
+        fromJSONToHTMLTable(json);
+      };
+    </script>
+  </body>
+</html>
