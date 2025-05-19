@@ -1,6 +1,5 @@
 function sortArray(array) {
-  let copyArray = JSON.parse(JSON.stringify(array));
-  let sorted = copyArray
+  let copyArray = JSON.parse(JSON.stringify(array))
     .sort((a, b) => a.length - b.length || a.localeCompare(b))
     .forEach((element) => {
       console.log(element);
