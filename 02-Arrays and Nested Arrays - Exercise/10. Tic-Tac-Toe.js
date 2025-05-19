@@ -83,7 +83,6 @@ function ticTacToe(moves) {
   );
 }
 
-// Test cases
 ticTacToe([
   "0 1",
   "0 0",
