@@ -5,9 +5,7 @@ function addOrRemove(array) {
     acc += 1;
     if (current === "add") {
       result.push(acc);
-    }
-
-    if (current === "remove") {
+    } else if (current === "remove") {
       result.pop();
     }
 
