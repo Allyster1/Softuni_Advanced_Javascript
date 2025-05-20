@@ -7,7 +7,7 @@ function hydrateWorker(workerData) {
     dizziness: false,
   };
 
-  console.log(worker);
+  return worker;
 }
 
 hydrateWorker({
