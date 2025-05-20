@@ -21,44 +21,51 @@
   <body>
     <div id="wrapper"></div>
     <script>
-      function fromJSONToHTMLTable(json) {
-        let arr = JSON.parse(json);
-        let outputArr = ["<table>"];
+      function fromJSONToHTMLTable(input) {
+        //parse input
+        //create output data structure
+        // add opening table tag
+        // take the first element from the input an create table heading
 
-        let headers = Object.keys(arr[0]);
-        outputArr.push(makeKeyRow(headers));
+        // for each record of input:
+        // - create a new row ith cells for each property
+        // - add to output
+        // add closing tag
+        // return output
+        input = JSON.parse(input);
+        let result = ["<table>"];
 
-        arr.forEach((obj) => outputArr.push(makeValueRow(obj, headers)));
+        let [firstElement] = input;
+        let headings = Object.keys(firstElement);
 
-        outputArr.push("</table>");
+        result.push(
+          `<tr>${headings.map((h) => `<th>${h}</th>`).join("")}</tr>`
+        );
 
-        function makeKeyRow(headers) {
-          let headerCells = headers.map(
-            (header) => `<th>${escapeHtml(header)}</th>`
-          );
-          return `   <tr>${headerCells.join("")}</tr>`;
-        }
+        for (let record of input) {
+          let row = ["<tr>"];
 
-        function makeValueRow(obj, headers) {
-          let cells = headers.map(
-            (header) => `<td>${escapeHtml(obj[header])}</td>`
-          );
-          return `   <tr>${cells.join("")}</tr>`;
-        }
-
-        function escapeHtml(value) {
-          if (typeof value === "string") {
-            return value
-              .replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;")
-              .replace(/"/g, "&quot;")
-              .replace(/'/g, "&#039;");
+          for (let prop of headings) {
+            row.push(`<td>${record[prop]}</td>`);
           }
-          return value;
+
+          row.push("</tr>");
+
+          result.push(row.join(""));
         }
 
-        console.log(outputArr.join("\n"));
+        result.push("</table>");
+
+        return result.join("\n");
+
+        function escaleHTML(value) {
+          //<>&
+          return value.replace(/(<|>|&|;)/g, (match) => {
+            {'<': '&lt',
+            '>': }
+
+          });
+        }
       }
 
       window.onload = function () {
