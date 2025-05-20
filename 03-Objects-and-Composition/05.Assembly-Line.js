@@ -1,6 +1,6 @@
 function createAssemblyLine() {
   const carData = {
-    hasClima: function hasClima(car) {
+    hasClima(car) {
       car.temp = 21;
       car.tempSettings = 21;
       car.adjustTemp = function adjustTemp() {
@@ -11,7 +11,7 @@ function createAssemblyLine() {
         }
       };
     },
-    hasAudio: function hasAudio(car) {
+    hasAudio(car) {
       car.currentTrack = null;
       car.nowPlaying = function nowPlaying() {
         if (this.currentTrack !== null) {
@@ -21,7 +21,7 @@ function createAssemblyLine() {
         }
       };
     },
-    hasParktronic: function hasParktronic(car) {
+    hasParktronic(car) {
       car.checkDistance = function checkDistance(distance) {
         if (distance < 0.1) {
           console.log("Beep! Beep! Beep!");
