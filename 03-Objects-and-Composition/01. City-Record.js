@@ -1,11 +1,11 @@
-function printRecord(name, population, treasure) {
+function printRecord(name, population, treasury) {
   const record = {
-    name: name,
-    population: population,
-    treasury: treasure,
+    name,
+    population,
+    treasury,
   };
 
-  return record;
+  console.log(record);
 }
 
 printRecord("Tortuga", 7000, 15000);
