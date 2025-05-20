@@ -4,11 +4,7 @@ function createAssemblyLine() {
       car.temp = 21;
       car.tempSettings = 21;
       car.adjustTemp = function adjustTemp() {
-        if (this.temp < this.tempSettings) {
-          this.temp += 1;
-        } else if (this.temp > this.tempSettings) {
-          this.temp -= 1;
-        }
+        this.temp < this.tempSettings ? (this.temp += 1) : (this.temp -= 1);
       };
     },
     hasAudio(car) {
