@@ -1,9 +1,9 @@
 function printLowestPrice(townInfo) {
   let productPrices = {};
 
-  for (const entry of townInfo) {
-    const [town, product, priceStr] = entry.split(" | ");
-    const price = Number(priceStr);
+  for (let elements of townInfo) {
+    let [town, product, priceStr] = elements.split(" | ");
+    let price = Number(priceStr);
 
     if (!productPrices[product] || productPrices[product].price > price) {
       productPrices[product] = { town, price };
@@ -11,7 +11,7 @@ function printLowestPrice(townInfo) {
   }
 
   for (let product in productPrices) {
-    const { town, price } = productPrices[product];
+    let { town, price } = productPrices[product];
     console.log(`${product} -> ${price} (${town})`);
   }
 }
