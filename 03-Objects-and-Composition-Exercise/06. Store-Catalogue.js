@@ -1,5 +1,5 @@
-function printCatalogue(input) {
-  let products = input
+function printCatalogue(data) {
+  let products = data
     .map((element) => {
       let [name, price] = element.split(" : ");
       return { name, price: Number(price) };
