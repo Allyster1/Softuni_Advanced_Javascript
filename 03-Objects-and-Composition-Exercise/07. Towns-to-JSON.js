@@ -5,7 +5,7 @@ function printData(arrayData) {
     element
       .split("|")
       .map((item) => item.trim())
-      .filter((item) => item !== "")
+      .filter((item) => item)
   );
 
   let townInfo = {};
