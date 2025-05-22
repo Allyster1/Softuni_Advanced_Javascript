@@ -1,21 +1,25 @@
-function printHeroInventory(arrayData) {
-  let heroInventory = [];
+function printHeroInventory(dataArray) {
+  let heroes = [];
 
-  for (const element of arrayData) {
-    let [name, level, items] = element.split(" / ");
-    level = Number(level);
+  for (let elements of dataArray) {
+    let [name, levelStr, items] = elements.split(" / ");
 
-    items = items ? (items = items.split(", ")) : [];
-    heroInventory.push({ name, level, items });
+    let level = Number(levelStr);
+    if (!name || !levelStr) {
+      continue;
+    }
+
+    items = items
+      ? items
+          .split(",")
+          .map((item) => item.trim())
+          .filter((item) => item)
+      : [];
+
+    heroes.push({ name, level, items });
   }
 
-  console.log(JSON.stringify(heroInventory));
+  console.log(JSON.stringify(heroes));
 }
-
-// printHeroInventory([
-//   "Isacc / 25 / Apple, GravityGun",
-//   "Derek / 12 / BarrelVest, DestructionSword",
-//   "Hes / 1 / Desolator, Sentinel, Antara",
-// ]);
 
 printHeroInventory(["Jake / 1000 / Gauss, HolidayGrenade"]);
