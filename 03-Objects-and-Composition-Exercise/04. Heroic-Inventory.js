@@ -4,10 +4,11 @@ function printHeroInventory(dataArray) {
   for (let elements of dataArray) {
     let [name, levelStr, items] = elements.split(" / ");
 
-    let level = Number(levelStr);
     if (!name || !levelStr) {
       continue;
     }
+
+    let level = Number(levelStr);
 
     items = items
       ? items
