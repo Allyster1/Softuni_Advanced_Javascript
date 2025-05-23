@@ -4,7 +4,6 @@ function extractText() {
   const result = [];
 
   for (const li of ulRef) {
-    console.log(li.textContent);
     result.push(li.textContent);
   }
 
