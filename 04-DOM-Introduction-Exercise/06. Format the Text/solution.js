@@ -8,8 +8,11 @@ function solve() {
     .filter((text) => text.length > 0);
 
   if (sentances.length === 0) {
+    console.log("Input should have at least one sentance");
     return;
   }
+
+  output.textContent = "";
 
   const sentanceSize = sentances.length <= 2 ? sentances.length : 3;
   const textArray = [];
