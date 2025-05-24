@@ -2,55 +2,26 @@ function solve() {
   const textAreaRef = document.getElementById("input");
   const output = document.getElementById("output");
 
-  let formattedText = textAreaRef.value
+  const sentances = textAreaRef.value
     .split(".")
     .map((text) => text.trim())
-    .filter((text) => text);
+    .filter((text) => text.length > 0);
 
-  let textCounter = formattedText.length;
-  let counter = 0;
-  if (textCounter <= 2) {
-    let text = [];
-    for (let element of formattedText) {
-      text.push(element);
-    }
+  if (sentances.length === 0) {
+    return;
+  }
+
+  const sentanceSize = sentances.length <= 2 ? sentances.length : 3;
+  const textArray = [];
+
+  for (let i = 0; i < sentances.length; i += sentanceSize) {
+    let slicedSentance = sentances.slice(i, i + sentanceSize);
+    textArray.push(slicedSentance);
+  }
+
+  for (let items of textArray) {
     const paragraph = document.createElement("p");
-    paragraph.textContent = text.join(". ") + ".";
+    paragraph.textContent = items.join(". ") + ".";
     output.appendChild(paragraph);
-    text = [];
-  } else if (textCounter >= 7) {
-    let text = [];
-    for (let element of formattedText) {
-      if (counter === 3) {
-        counter = 0;
-        const paragraph = document.createElement("p");
-        paragraph.textContent = text.join(". ") + ".";
-        output.appendChild(paragraph);
-        text = [];
-      }
-      text.push(element);
-      counter++;
-    }
-    const paragraph = document.createElement("p");
-    paragraph.textContent = text.join(". ") + ".";
-    output.appendChild(paragraph);
-    text = [];
-  } else {
-    let text = [];
-    for (let element of formattedText) {
-      if (counter === 3) {
-        counter = 0;
-        const paragraph = document.createElement("p");
-        paragraph.textContent = text.join(". ") + ".";
-        output.appendChild(paragraph);
-        text = [];
-      }
-      text.push(element);
-      counter++;
-    }
-    const paragraph = document.createElement("p");
-    paragraph.textContent = text.join(". ") + ".";
-    output.appendChild(paragraph);
-    text = [];
   }
 }
