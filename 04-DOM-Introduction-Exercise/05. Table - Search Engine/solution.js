@@ -6,15 +6,10 @@ function solve() {
   searchBtnRef.addEventListener("click", searchData);
 
   function searchData() {
-    const searchText = searchFieldRef.value.trim().toLowerCase();
+    const searchText = searchFieldRef.value.toLowerCase();
 
     for (let item of trRef) {
       item.classList.remove("select");
-    }
-
-    if (!searchText) {
-      console.log("returned");
-      return;
     }
 
     for (let item of trRef) {
