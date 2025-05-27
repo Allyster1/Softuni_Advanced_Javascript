@@ -8,8 +8,8 @@ function solve() {
   function searchData() {
     const searchText = searchFieldRef.value.toLowerCase();
 
-    for (let item of trRef) {
-      item.classList.remove("select");
+    if (!searchText) {
+      return;
     }
 
     for (let item of trRef) {
@@ -21,6 +21,8 @@ function solve() {
         if (tdText.includes(searchText)) {
           item.classList.add("select");
           break;
+        } else {
+          item.classList.remove("select");
         }
       }
     }
