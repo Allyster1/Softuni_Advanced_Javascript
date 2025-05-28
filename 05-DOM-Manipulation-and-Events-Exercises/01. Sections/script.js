@@ -1,3 +1,18 @@
-function create(words) {
-   console.log('TODO:...');
+function create(sections) {
+  const content = document.getElementById("content");
+
+  sections.forEach((section) => {
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+
+    p.textContent = section;
+    p.style.display = "none";
+
+    div.appendChild(p);
+    div.addEventListener("click", () => {
+      p.style.display = "";
+    });
+
+    content.appendChild(div);
+  });
 }
