@@ -1,14 +1,18 @@
 function focused() {
-  const parent = document.querySelector("body>div");
+  const divElements = document.querySelectorAll("div div");
 
-  parent.addEventListener("focusin", onFocus);
-  parent.addEventListener("focusout", onBlur);
+  for (const div of divElements) {
+    const inputElement = div.querySelector("input");
 
-  function onFocus(event) {
-    event.target.parentElement.classList.add("focused");
-  }
+    if (!inputElement) {
+      return;
+    }
 
-  function onBlur(event) {
-    event.target.parentElement.classList.remove("focused");
+    inputElement.addEventListener("focus", () => {
+      div.classList.add("focused");
+    });
+    inputElement.addEventListener("blur", () => {
+      div.classList.remove("focused");
+    });
   }
 }
