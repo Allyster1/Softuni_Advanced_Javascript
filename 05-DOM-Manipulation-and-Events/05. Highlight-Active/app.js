@@ -4,7 +4,7 @@ function focused() {
   for (const div of divElements) {
     const inputElement = div.querySelector("input");
 
-    if (!inputElement) {
+    if (!inputElement.value) {
       return;
     }
 
