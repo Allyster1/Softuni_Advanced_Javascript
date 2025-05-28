@@ -1,22 +1,18 @@
 function deleteByEmail() {
-  const trRef = document.querySelectorAll("tbody tr");
-  const changeType = document.getElementById("result");
-  const inputText = document.querySelector("input");
+  const input = document.querySelector('[name="email"]');
+
+  const rows = Array.from(document.querySelector("tbody").children);
   let foundEmail = false;
 
-  if (!inputText.value && inputText.trim() !== "") {
-    return;
-  }
-
-  for (const tr of trRef) {
-    const tdEmail = tr.getElementsByTagName("td")[1];
-    if (tdEmail && tdEmail.textContent === inputText.value) {
-      tr.remove();
+  for (const row of rows) {
+    if (row.children[1].textContent === input.value) {
+      row.remove();
       foundEmail = true;
-      break;
     }
   }
+  let output = document.getElementById("result");
 
-  changeType.textContent = foundEmail ? "Deleted." : "Not found.";
-  inputText.value = "";
+  output.textContent = foundEmail ? "Deleted." : "Not found.";
+
+  input.value = "";
 }
