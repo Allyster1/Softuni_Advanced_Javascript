@@ -4,15 +4,15 @@ function focused() {
   for (const div of divElements) {
     const inputElement = div.querySelector("input");
 
-    if (!inputElement.value) {
-      return;
-    }
+    inputElement.addEventListener("focus", onFocus);
+    inputElement.addEventListener("blur", onBlur);
+  }
 
-    inputElement.addEventListener("focus", () => {
-      div.classList.add("focused");
-    });
-    inputElement.addEventListener("blur", () => {
-      div.classList.remove("focused");
-    });
+  function onFocus() {
+    this.parentElement.classList.add("focused");
+  }
+
+  function onBlur() {
+    this.parentElement.classList.remove("focused");
   }
 }
