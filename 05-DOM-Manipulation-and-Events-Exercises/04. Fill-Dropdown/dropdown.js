@@ -2,6 +2,7 @@ function addItem() {
   const menu = document.getElementById("menu");
   const input = document.getElementById("newItemText");
   const inputValue = document.getElementById("newItemValue");
+
   if (!input.value || !inputValue.value) {
     return;
   }
