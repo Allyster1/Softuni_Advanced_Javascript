@@ -1,9 +1,8 @@
 function lockedProfile() {
-  const profilesInfo = Array.from(document.querySelectorAll(".profile"));
+  const profilesInfo = document.querySelectorAll(".profile");
 
   for (const profile of profilesInfo) {
     const [lock, unlock] = profile.querySelectorAll('input[type="radio"]');
-
     const button = profile.querySelector("button");
     const hiddenInfo = profile.querySelector("div");
 
