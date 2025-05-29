@@ -6,7 +6,9 @@ function lockedProfile() {
     const button = profile.querySelector("button");
     const hiddenInfo = profile.querySelector("div");
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", toggleInfo);
+
+    function toggleInfo() {
       if (unlock.checked) {
         if (hiddenInfo.style.display === "inline-block") {
           hiddenInfo.style.display = "none";
@@ -16,6 +18,6 @@ function lockedProfile() {
           button.textContent = "Hide it";
         }
       }
-    });
+    }
   }
 }
