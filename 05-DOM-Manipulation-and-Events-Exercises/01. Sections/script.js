@@ -10,7 +10,7 @@ function create(sections) {
 
     div.appendChild(p);
     div.addEventListener("click", () => {
-      p.style.display = "";
+      p.style.display = p.style.display === "none" ? "" : "none";
     });
 
     content.appendChild(div);
