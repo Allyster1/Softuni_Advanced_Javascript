@@ -1,81 +1,88 @@
+class FurnitureItem {
+  element;
+  record;
+  _checkbox;
+
+  get checked() {
+    return this._checkbox.checked;
+  }
+
+  constructor(record) {
+    this.record = record;
+
+    this.init();
+  }
+
+  init() {
+    this._checkbox = html("input", { type: "checkbox" });
+
+    this.element = html("tr", {}, [
+      td([html("img", { src: this.record.img })]),
+      td([html("p", {}, [this.record.name])]),
+      td([html("p", {}, [this.record.price])]),
+      td([html("p", {}, [this.record.decFactor])]),
+      td([this._checkbox]),
+    ]);
+  }
+}
+
 function solve() {
-  const [generateBtn, buyBtn] = document.querySelectorAll("button");
+  // parse input JSON
+
+  // generate rows
+  // - products rows keep record data and checkbox status
+
+  // summarize purchase
+  // - filter products for only the checked ones
+  // - extract record data
+  // - summarize
+
   const [input, output] = document.querySelectorAll("textarea");
-  const tableBody = document.querySelector("table tbody");
+  const [generateBtn, buyBtn] = document.querySelectorAll("button");
+  const table = document.querySelector("tbody");
 
-  generateBtn.addEventListener("click", generateFurniture);
-  buyBtn.addEventListener("click", buyFurniture);
+  const products = [];
 
-  function generateFurniture() {
-    const furnitureArray = JSON.parse(input.value);
+  generateBtn.addEventListener("click", () => {
+    const data = JSON.parse(input.value);
 
-    for (const item of furnitureArray) {
-      const row = document.createElement("tr");
-
-      // Image
-      const imgTd = document.createElement("td");
-      const img = document.createElement("img");
-      img.src = item.img;
-      imgTd.appendChild(img);
-      row.appendChild(imgTd);
-
-      // Name
-      const nameTd = document.createElement("td");
-      const nameP = document.createElement("p");
-      nameP.textContent = item.name;
-      nameTd.appendChild(nameP);
-      row.appendChild(nameTd);
-
-      // Price
-      const priceTd = document.createElement("td");
-      const priceP = document.createElement("p");
-      priceP.textContent = item.price;
-      priceTd.appendChild(priceP);
-      row.appendChild(priceTd);
-
-      // Decoration Factor
-      const factorTd = document.createElement("td");
-      const factorP = document.createElement("p");
-      factorP.textContent = item.decFactor;
-      factorTd.appendChild(factorP);
-      row.appendChild(factorTd);
-
-      // Checkbox
-      const markTd = document.createElement("td");
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      markTd.appendChild(checkbox);
-      row.appendChild(markTd);
-
-      tableBody.appendChild(row);
+    for (let record of data) {
+      const row = new FurnitureItem(record);
+      table.appendChild(row.element);
+      products.push(row);
     }
-  }
+  });
 
-  function buyFurniture() {
-    const checkboxes = tableBody.querySelectorAll(
-      "input[type='checkbox']:checked"
-    );
+  buyBtn.addEventListener("click", () => {
+    const selected = products.filter((p) => p.checked).map((p) => p.record);
 
-    const boughtFurniture = [];
-    let totalPrice = 0;
-    let totalDecFactor = 0;
+    const price = selected.reduce((a, c) => a + Number(c.price), 0);
+    const decFactor = selected.reduce((a, c) => a + Number(c.decFactor), 0);
 
-    for (const checkbox of checkboxes) {
-      const row = checkbox.closest("tr");
-      const name = row.children[1].textContent;
-      const price = Number(row.children[2].textContent);
-      const decFactor = Number(row.children[3].textContent);
+    const result = [
+      `Bought furniture: ${selected.map((p) => p.name).join(", ")}`,
+      `Total price: ${price.toFixed(2)}`,
+      `Average decoration factor: ${decFactor / selected.length}`,
+    ];
 
-      boughtFurniture.push(name);
-      totalPrice += price;
-      totalDecFactor += decFactor;
+    output.value = result.join("\n");
+  });
+}
+
+const td = (content) => html("td", {}, content);
+
+function html(tagName, attr = {}, content = []) {
+  const element = document.createElement(tagName);
+
+  Object.assign(element, attr);
+
+  for (let item of content) {
+    if (typeof item != "object") {
+      item = document.createTextNode(item);
     }
 
-    const averageDecFactor = totalDecFactor / boughtFurniture.length || 0;
-
-    output.value =
-      `Bought furniture: ${boughtFurniture.join(", ")}\n` +
-      `Total price: ${totalPrice.toFixed(2)}\n` +
-      `Average decoration factor: ${averageDecFactor}`;
+    element.appendChild(item);
   }
+
+  return element;
 }
