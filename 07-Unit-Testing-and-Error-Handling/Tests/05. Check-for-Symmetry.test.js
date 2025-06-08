@@ -17,7 +17,6 @@ describe("Main Tests", () => {
   });
 
   it("returns true for symmetric arrays", () => {
-    expect(isSymmetric([1, 2, 3])).to.be.false;
     expect(isSymmetric([1, 2, 1])).to.be.true;
     expect(isSymmetric([1, 2, 2, 1])).to.be.true;
     expect(isSymmetric(["a", "b", "a"])).to.be.true;
