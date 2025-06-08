@@ -6,13 +6,7 @@ describe("Main Tests", () => {
     expect(isSymmetric(1)).to.be.false;
     expect(isSymmetric("1")).to.be.false;
     expect(isSymmetric({})).to.be.false;
-  });
-
-  it("returns false for a null input", () => {
     expect(isSymmetric(null)).to.be.false;
-  });
-
-  it("returs false for a undefined input", () => {
     expect(isSymmetric(undefined)).to.be.false;
   });
 
