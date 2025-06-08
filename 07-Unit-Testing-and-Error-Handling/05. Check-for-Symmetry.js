@@ -9,3 +9,5 @@ export function isSymmetric(arr) {
 
   return equal;
 }
+
+console.log(isSymmetric([3, 3, 3]));
