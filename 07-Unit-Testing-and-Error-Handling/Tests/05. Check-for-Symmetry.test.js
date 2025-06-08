@@ -8,7 +8,7 @@ describe("Main Tests", () => {
     expect(isSymmetric({})).to.be.false;
   });
 
-  it("returns null for a null input", () => {
+  it("returns false for a null input", () => {
     expect(isSymmetric(null)).to.be.false;
   });
 
