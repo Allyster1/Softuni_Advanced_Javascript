@@ -2,13 +2,9 @@
   "name": "07-unit-testing-and-error-handling",
   "version": "1.0.0",
   "description": "Unit Tests for Lab",
-  "main": "01. Sub-Sumator.js",
   "type": "module",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "test": "mocha \"Tests/*.test.js\""
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
