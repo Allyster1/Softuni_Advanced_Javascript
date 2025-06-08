@@ -1,7 +1,7 @@
 {
   "name": "07-unit-testing-and-error-handling-exercises",
   "version": "1.0.0",
-  "description": "Unit Tests for Lab",
+  "description": "Unit Tests for Exercises",
   "type": "module",
   "scripts": {
     "test": "mocha"
