@@ -12,7 +12,7 @@ describe("Main Tests", () => {
     expect(isSymmetric(null)).to.be.false;
   });
 
-  it("returs false for undefined input", () => {
+  it("returs false for a undefined input", () => {
     expect(isSymmetric(undefined)).to.be.false;
   });
 
