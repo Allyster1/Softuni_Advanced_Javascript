@@ -1,5 +1,5 @@
 function validateRequest(objectData) {
-  const uriPattern = /^[\w.]+$/g;
+  const uriPattern = /^[\w]+$/g;
   const validMethods = ["GET", "POST", "DELETE", "CONNECT"];
   const validVersions = ["HTTP/0.9", "HTTP/1.0", "HTTP/1.1", "HTTP/2.0"];
   const invalidSymbols = ["<", ">", "\\", "&", "'", '"'];
