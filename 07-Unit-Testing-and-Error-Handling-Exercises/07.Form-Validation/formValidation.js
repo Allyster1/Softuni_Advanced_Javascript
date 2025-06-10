@@ -13,7 +13,7 @@ function validate() {
   const submitBtn = document.getElementById("submit");
 
   const usernamePattern = /^[a-zA-Z0-9]{3,20}$/;
-  const emailPattern = /^[^@]+@[^@]+\.[^@]+$/;
+  const emailPattern = /^[^@.]+@[^@]*\.[^@]*$/;
   const passwordPattern = /^\w{5,15}$/;
 
   companyCheck.addEventListener("change", () => {
@@ -31,14 +31,14 @@ function validate() {
     let isValid = true;
 
     if (!usernamePattern.test(username.value)) {
-      username.style.borderColor = "#ff0000";
+      username.style.borderColor = "red";
       isValid = false;
     } else {
       username.style.borderColor = "";
     }
 
     if (!emailPattern.test(email.value)) {
-      email.style.borderColor = "#ff0000";
+      email.style.borderColor = "red";
       isValid = false;
     } else {
       email.style.borderColor = "";
@@ -55,7 +55,7 @@ function validate() {
       !passwordPattern.test(confirmPassword.value) ||
       confirmPassword.value !== password.value
     ) {
-      confirmPassword.style.borderColor = "#ff0000";
+      confirmPassword.style.borderColor = "red";
       isValid = false;
     } else {
       confirmPassword.style.borderColor = "";
@@ -69,7 +69,7 @@ function validate() {
         companyNumValue < 1000 ||
         companyNumValue > 9999
       ) {
-        companyNumber.style.borderColor = "#ff0000";
+        companyNumber.style.borderColor = "red";
         isValid = false;
       } else {
         companyNumber.style.borderColor = "";
