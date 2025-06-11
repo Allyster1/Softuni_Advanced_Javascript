@@ -9,12 +9,17 @@ function calculateFigure() {
       this.units = units;
     }
 
-    get _area() {
-      return this.area;
+    get area() {
+      return this;
     }
 
-    changeUnits(value) {
-      this.units = value;
+    set changeUnits(value) {
+      if (!["cm", "m", "mm"].includes(value)) {
+        return;
+      }
+
+      if (this.units === "mm") {
+      }
     }
 
     toString() {
@@ -22,11 +27,48 @@ function calculateFigure() {
     }
   }
 
-  let f = new Figure("mmm");
+  class Circle extends Figure {
+    radius;
+    constructor(radius, units) {
+      super(units);
+      this.radius = radius;
+    }
 
-  console.log(f);
+    get area() {
+      return Math.PI * this.radius * this.radius;
+    }
 
-  return { Figure };
+    toString() {
+      return `Figures units: ${this.units} Area: ${this.area} - radius: ${this.radius}`;
+    }
+  }
+
+  class Rectangle extends Figure {
+    width;
+    height;
+    units;
+    constructor(width, height, units) {
+      super(units);
+      this.width = width;
+      this.height = height;
+      this.units = units;
+    }
+
+    get area() {
+      return this.width * this.height;
+    }
+    toString() {
+      return `Figures units: ${this.units} Area: ${this.area} - width: ${this.width}, height: ${this.height}`;
+    }
+  }
+
+  let r = new Rectangle(3, 4, "mm");
+  console.log(r);
+
+  console.log(r.area); // 1200
+  console.log(r.toString()); //Figures units: mm Area: 1200 - width: 30, height: 40
+
+  return { Figure, Circle, Rectangle };
 }
 
 calculateFigure();
