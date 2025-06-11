@@ -1,0 +1,3 @@
+function extendPrototype(classToExtend) {
+  // TODO:
+}
