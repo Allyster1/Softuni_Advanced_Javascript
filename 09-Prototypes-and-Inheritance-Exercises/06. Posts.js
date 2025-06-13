@@ -74,9 +74,8 @@ console.log("-----------");
 // * Good post
 // * Very good post
 // * Wow
-let blog = new classes.BlogPost("Chaining Test", "This is awesome", 10);
+let blog = new classes.BlogPost("A Cool Title", "Amazing Content", 100);
 console.log(blog.view().view().toString());
-// console.log(blog.toString());
-// Post: The Best Title
-// Content: Some Content
-// Views: 51
+// Post: A Cool Title
+// Content: Amazing Content
+// Views: 102
