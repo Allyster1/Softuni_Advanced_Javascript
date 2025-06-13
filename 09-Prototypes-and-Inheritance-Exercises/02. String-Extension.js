@@ -1,4 +1,4 @@
-function extendString() {
+(function stringExtension() {
   String.prototype.ensureStart = function (str) {
     if (!this.startsWith(str)) {
       return str + this;
@@ -8,47 +8,45 @@ function extendString() {
 
   String.prototype.ensureEnd = function (str) {
     if (!this.endsWith(str)) {
-      return str + this;
+      return this + str;
     }
-    return this.toString;
+    return this.toString();
   };
 
   String.prototype.isEmpty = function () {
     return !this.toString();
   };
 
-  String.prototype.truncate = function (number) {
-    if (number < 4) {
-      return ".".repeat(number);
-    } else if (this.length <= number) {
+  String.prototype.truncate = function (n) {
+    if (n < 4) {
+      return ".".repeat(n);
+    } else if (this.length <= n) {
       return this.toString();
-    } else if (this.includes("")) {
-      const words = this.split(" ");
+    } else if (this.includes(" ")) {
+      let words = this.split(" ");
       let result = [];
 
-      for (const word of words) {
-        const currentStr = result.join(" ") + word;
-        if (currentStr.length + 3 <= number) {
+      for (let word of words) {
+        let current = result.join(" ") + word;
+        if (current.length + 3 <= n) {
           result.push(word);
         } else {
           break;
         }
       }
-
       return result.join(" ") + "...";
     }
-    return this.splice(0, number - 3) + "...";
+    return this.slice(0, n - 3) + "...";
   };
 
   String.format = function (string, ...params) {
     for (let i = 0; i < params.length; i++) {
       let currentWord = params[i];
-      string = string.replace(`${i}`, currentWord);
+      string = string.replace(`{${i}}`, currentWord);
     }
     return string;
   };
-}
-extendString();
+})();
 
 let str = "my string";
 str = str.ensureStart("my");
