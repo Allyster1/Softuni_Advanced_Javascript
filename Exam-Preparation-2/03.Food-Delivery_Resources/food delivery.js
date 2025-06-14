@@ -1,4 +1,4 @@
-const foodDelivery = {
+export const foodDelivery = {
   getCategory(category) {
     if (category === "Vegan") {
       return "Dishes that contain no animal products.";
@@ -63,3 +63,12 @@ const foodDelivery = {
     }
   },
 };
+
+let result = foodDelivery.addMenuItem(
+  [
+    { name: "coffee", price: 5 },
+    { name: "energy drink", price: 10 },
+  ],
+  15
+);
+console.log(result);
