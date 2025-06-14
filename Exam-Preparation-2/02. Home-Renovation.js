@@ -66,7 +66,7 @@ class HomeRenovation {
   }
 
   renovationSummary() {
-    if (!this.completedTasks) {
+    if (this.completedTasks.length === 0) {
       throw new Error("No tasks have been completed yet!");
     }
 
