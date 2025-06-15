@@ -15,4 +15,4 @@ In the "JS Advanced" course, you will gain in-depth knowledge of the JavaScript 
 * Functional programming
 
 ## 📚 Navigation
-> Previous course: [**`JS Advanced`**](https://github.com)
+> Next course: [**`JS Applications`**](https://github.com/Allyster1/JS-Applications)
