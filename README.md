@@ -13,3 +13,6 @@ In the "JS Advanced" course, you will gain in-depth knowledge of the JavaScript 
 * Extracting information and manipulating the DOM tree
 * Object-oriented programming
 * Functional programming
+
+## 📚 Navigation
+> Previous course: [**`JS Advanced`**](https://github.com)
