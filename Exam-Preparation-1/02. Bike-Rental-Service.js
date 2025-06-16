@@ -6,104 +6,99 @@ class BikeRentalService {
   }
 
   addBikes(bikes) {
-    class Bike {
-      constructor(brand, quantity, price) {
-        this.brand = brand;
-        this.quantity = quantity;
-        this.price = price;
-      }
-    }
+    const addedBrands = [];
 
-    let addedBrands = new Set();
+    for (let element of bikes) {
+      let [brand, quantity, price] = element.split("-");
 
-    for (const data of bikes) {
-      let [brand, quantity, price] = data.split("-");
       price = Number(price);
       quantity = Number(quantity);
-      let existingBike = this.availableBikes.find(
+
+      const existingBikeIndex = this.availableBikes.findIndex(
         (bike) => bike.brand === brand
       );
 
-      if (existingBike) {
+      if (existingBikeIndex !== -1) {
+        const existingBike = this.availableBikes[existingBikeIndex];
         existingBike.quantity += quantity;
-        if (existingBike.price < price) {
+        if (price > existingBike.price) {
           existingBike.price = price;
         }
       } else {
-        this.availableBikes.push(new Bike(brand, quantity, price));
-        addedBrands.add(brand);
+        this.availableBikes.push({ brand, quantity, price });
+        addedBrands.push(brand);
       }
     }
-    return `Successfully added ${[...addedBrands].join(", ")}`;
+
+    return `Successfully added ${[...new Set(addedBrands)].join(", ")}`;
   }
 
   rentBikes(selectedBikes) {
     let totalPrice = 0;
     let brandNotFound = false;
 
-    for (const bike of selectedBikes) {
-      let [brand, quantity] = bike.split("-");
-      let bikeIndex = this.availableBikes.findIndex(
-        (bike) => (bike.brand = brand)
+    for (let element of selectedBikes) {
+      const [brand, quantity] = element.split("-");
+      const bikeIndex = this.availableBikes.findIndex(
+        (bike) => bike.brand === brand
       );
-
-      let availableQuantity =
+      const availableQuantity =
         bikeIndex !== -1 ? this.availableBikes[bikeIndex].quantity : 0;
 
       if (bikeIndex === -1 || parseInt(quantity) > availableQuantity) {
         brandNotFound = true;
       } else {
-        let priceBike = this.availableBikes[bikeIndex].price;
-        totalPrice += priceBike * parseInt(quantity);
+        const pricePerBike = this.availableBikes[bikeIndex].price;
+        totalPrice += parseInt(quantity) * pricePerBike;
         this.availableBikes[bikeIndex].quantity -= parseInt(quantity);
       }
     }
 
     if (brandNotFound) {
-      ("Some of the bikes are unavailable or low on quantity in the bike rental service.");
+      return `Some of the bikes are unavailable or low on quantity in the bike rental service.`;
     }
-
     return `Enjoy your ride! You must pay the following amount $${totalPrice.toFixed(
       2
     )}.`;
   }
 
-  returnBikes(returnBikes) {
-    let hasInvalidBike = false;
+  returnBikes(returnedBikes) {
+    let brandNotFound = false;
 
-    for (const data of returnBikes) {
-      let [brand, quantity] = data.split("-");
-      quantity = Number(quantity);
+    for (let element of returnedBikes) {
+      const [brand, quantity] = element.split("-");
+      const bikeIndex = this.availableBikes.findIndex(
+        (bike) => bike.brand === brand
+      );
 
-      let bike = this.availableBikes.find((b) => b.brand === brand);
-
-      if (bike) {
-        bike.quantity += quantity;
+      if (bikeIndex === -1) {
+        brandNotFound = true;
       } else {
-        hasInvalidBike = true;
+        this.availableBikes[bikeIndex].quantity += parseInt(quantity);
       }
     }
 
-    return hasInvalidBike
-      ? "Some of the returned bikes are not from our selection."
-      : "Thank you for returning!";
+    if (brandNotFound) {
+      return "Some of the returned bikes are not from our selection.";
+    } else {
+      return "Thank you for returning!";
+    }
   }
 
-  revisiom() {
+  revision() {
     let result = [];
-    result.push("Available bikes:");
+    result.push(`Available bikes:`);
 
     const sortedBikes = this.availableBikes.sort((a, b) => a.price - b.price);
 
-    for (const bike of sortedBikes) {
+    for (let bike of sortedBikes) {
       result.push(
-        `${bike[brand]} quantity: ${bike[quantity]} price:$${bike[price]}`
+        `${bike.brand} quantity:${bike.quantity} price:$${bike.price}`
       );
     }
     result.push(
       `The name of the bike rental service is ${this.name}, and the location is ${this.location}.`
     );
-
-    return result.join("\n");
+    return result.join(`\n`);
   }
 }

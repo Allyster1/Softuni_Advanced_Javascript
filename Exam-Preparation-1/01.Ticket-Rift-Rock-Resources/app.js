@@ -1,116 +1,142 @@
 window.addEventListener("load", solve);
 
 function solve() {
-  const ticketPurchaseUI = document.getElementById("ticket-purchase");
-  const ticketPreviewUI = document.getElementById("ticket-preview");
-  const bottomContentUI = document.querySelector(".bottom-content");
+  let ticketNumElement = document.getElementById("num-tickets");
+  let seatingElement = document.getElementById("seating-preference");
+  let nameElement = document.getElementById("full-name");
+  let emailElement = document.getElementById("email");
+  let phoneElement = document.getElementById("phone-number");
+  let btnElement = document.getElementById("purchase-btn");
+  let ticketListElement = document.getElementById("ticket-preview");
+  let purchasedListElement = document.getElementById("ticket-purchase");
+  let bottomElement = document.querySelector(".bottom-content");
 
-  const ticketNumberRef = document.getElementById("num-tickets");
-  const seatingPrefRef = document.getElementById("seating-preference");
-  const fullNameRef = document.getElementById("full-name");
-  const emailRef = document.getElementById("email");
-  const phoneRef = document.getElementById("phone-number");
+  btnElement.addEventListener("click", onAdd);
 
-  const purchaseBtn = document.getElementById("purchase-btn");
-
-  purchaseBtn.addEventListener("click", onPurchase);
-
-  function clearHTML() {
-    ticketNumberRef.value = "";
-    seatingPrefRef.value = "seating-preference";
-    fullNameRef.value = "";
-    emailRef.value = "";
-    phoneRef.value = "";
-  }
-
-  function onPurchase(e) {
+  function onAdd(e) {
     e.preventDefault();
-
-    const ticketsNumber = ticketNumberRef.value;
-    const seatingPref = seatingPrefRef.value;
-    const fullName = fullNameRef.value.trim();
-    const email = emailRef.value.trim();
-    const phone = phoneRef.value.trim();
-
     if (
-      !ticketsNumber ||
-      seatingPref === "seating-preference" ||
-      !fullName ||
-      !email ||
-      !phone
+      ticketNumElement.value == "" ||
+      seatingElement.value == "" ||
+      nameElement.value == "" ||
+      emailElement.value == "" ||
+      phoneElement.value == ""
     ) {
       return;
     }
 
-    const li = document.createElement("li");
-    li.classList.add("ticket-purchase");
+    let articleElementInfo = document.createElement("article");
+    let liElementInfo = document.createElement("li");
+    liElementInfo.setAttribute("class", "ticket-purchase");
+    let btnContainer = document.createElement("div");
+    btnContainer.setAttribute("class", "btn-container");
 
-    li.innerHTML = `
-    <article>
-      <p>Count: ${ticketsNumber}</p>
-      <p>Preference: ${seatingPref}</p>
-      <p>To: ${fullName}</p>
-      <p>Email: ${email}</p>
-      <p>Phone Number: ${phone}</p>
-    </article>
-    <div class="btn-container">
-      <button class="edit-btn">Edit</button>
-      <button class="next-btn">Next</button>
-    </div>
-    `;
+    let ticketNumber = document.createElement("p");
+    ticketNumber.textContent = `Count: ${ticketNumElement.value}`;
 
-    ticketPreviewUI.appendChild(li);
-    purchaseBtn.disabled = true;
-    clearHTML();
+    let seatingPref = document.createElement("p");
+    seatingPref.textContent = `Preference: ${seatingElement.value}`;
 
-    const editBtn = li.querySelector(".edit-btn");
-    const nextBtn = li.querySelector(".next-btn");
+    let fullName = document.createElement("p");
+    fullName.textContent = `To: ${nameElement.value}`;
 
-    editBtn.addEventListener("click", () => {
-      purchaseBtn.disabled = false;
+    let email = document.createElement("p");
+    email.textContent = `Email: ${emailElement.value}`;
 
-      ticketNumberRef.value = ticketsNumber;
-      seatingPrefRef.value = seatingPref;
-      fullNameRef.value = fullName;
-      emailRef.value = email;
-      phoneRef.value = phone;
+    let pNumber = document.createElement("p");
+    pNumber.textContent = `Phone Number: ${phoneElement.value}`;
 
-      li.remove();
-    });
+    let editBtn = document.createElement("button");
+    editBtn.setAttribute("class", "edit-btn");
+    editBtn.textContent = "Edit";
 
-    nextBtn.addEventListener("click", () => {
-      li.innerHTML = `
-      <article>
-        <p>Count: ${ticketsNumber}</p>
-        <p>Preference: ${seatingPref}</p>
-        <p>To: ${fullName}</p>
-        <p>Email: ${email}</p>
-        <p>Phone Number: ${phone}</p>
-        <button class="buy-btn">Buy</button>
-      </article>
-    `;
-      ticketPurchaseUI.appendChild(li);
+    let nextBtn = document.createElement("button");
+    nextBtn.setAttribute("class", "next-btn");
+    nextBtn.textContent = "Next";
 
-      const buyBtn = li.querySelector(".buy-btn");
+    articleElementInfo.appendChild(ticketNumber);
+    articleElementInfo.appendChild(seatingPref);
+    articleElementInfo.appendChild(fullName);
+    articleElementInfo.appendChild(email);
+    articleElementInfo.appendChild(pNumber);
 
-      buyBtn.addEventListener("click", () => {
-        li.remove();
-        const purchaseHeader = document.createElement("h2");
-        purchaseHeader.textContent = "Thank you for your purchase!";
+    btnContainer.appendChild(editBtn);
+    btnContainer.appendChild(nextBtn);
 
-        const backBtn = document.createElement("button");
+    liElementInfo.appendChild(articleElementInfo);
+    liElementInfo.appendChild(btnContainer);
+
+    ticketListElement.appendChild(liElementInfo);
+
+    let editedticketNumElement = ticketNumElement.value;
+    let editedseatingElement = seatingElement.value;
+    let editednameElement = nameElement.value;
+    let editedemailElement = emailElement.value;
+    let editedphoneElement = phoneElement.value;
+
+    ticketNumElement.value = "";
+    seatingElement.value = "";
+    nameElement.value = "";
+    emailElement.value = "";
+    phoneElement.value = "";
+
+    btnElement.disabled = true;
+
+    editBtn.addEventListener("click", onEdit);
+
+    function onEdit() {
+      ticketNumElement.value = editedticketNumElement;
+      seatingElement.value = editedseatingElement;
+      nameElement.value = editednameElement;
+      emailElement.value = editedemailElement;
+      phoneElement.value = editedphoneElement;
+
+      liElementInfo.remove();
+      btnElement.disabled = false;
+    }
+
+    nextBtn.addEventListener("click", onNext);
+
+    function onNext() {
+      let liElementconfirm = document.createElement("li");
+      liElementconfirm.setAttribute("class", "ticket-purchase");
+
+      let articleElementContinue = document.createElement("article");
+      articleElementContinue = articleElementInfo;
+
+      let buyBtn = document.createElement("button");
+      buyBtn.setAttribute("class", "buy-btn");
+      buyBtn.textContent = "Buy";
+
+      articleElementContinue.appendChild(buyBtn);
+      liElementconfirm.appendChild(articleElementContinue);
+
+      liElementInfo.remove();
+
+      purchasedListElement.appendChild(liElementconfirm);
+
+      buyBtn.addEventListener("click", onBuy);
+
+      function onBuy() {
+        liElementconfirm.remove();
+
+        let backBtn = document.createElement("button");
+        backBtn.setAttribute("class", "back-btn");
         backBtn.textContent = "Back";
-        backBtn.classList.add("back-btn");
 
-        bottomContentUI.appendChild(purchaseHeader);
-        bottomContentUI.appendChild(backBtn);
+        
+        let text = document.createElement("h2");
+        text.textContent = `Thank you for your purchase!`;
+        bottomElement.appendChild(text);
+        bottomElement.appendChild(backBtn);
+      
 
-        backBtn.addEventListener("click", () => {
-          purchaseHeader.remove();
-          backBtn.remove();
-          purchaseBtn.disabled = false;
-        });
-      });
-    });
+
+        backBtn.addEventListener("click", onCancel);
+        function onCancel() {
+          window.location.reload();
+        }
+      }
+    }
   }
 }

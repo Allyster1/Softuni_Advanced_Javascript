@@ -1,5 +1,4 @@
-﻿const workforceManagement = {
-
+const workforceManagement = {
   recruitStaff(name, role, experience) {
     if (role === "Developer") {
       if (experience >= 4) {
@@ -26,7 +25,12 @@
   dismissEmployee(workforce, employeeIndex) {
     let updatedStaff = [];
 
-    if (!Array.isArray(workforce) || !Number.isInteger(employeeIndex) || employeeIndex < 0 || employeeIndex >= workforce.length) {
+    if (
+      !Array.isArray(workforce) ||
+      !Number.isInteger(employeeIndex) ||
+      employeeIndex < 0 ||
+      employeeIndex >= workforce.length
+    ) {
       throw new Error("Invalid input");
     }
     for (let i = 0; i < workforce.length; i++) {
@@ -35,6 +39,7 @@
       }
     }
     return updatedStaff.join(", ");
-  }
+  },
 };
 
+module.exports = workforceManagement;
