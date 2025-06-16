@@ -13,3 +13,6 @@ In the "JS Advanced" course, you will gain in-depth knowledge of the JavaScript 
 * Extracting information and manipulating the DOM tree
 * Object-oriented programming
 * Functional programming
+
+## 📚 Navigation
+> Next course: [**`JS Applications`**](https://github.com/Allyster1/JS-Applications)
