@@ -84,7 +84,6 @@ function solve() {
           <button class="complete-btn">Complete</button>
         </article>
       </li>
-
     `;
       completeRef.innerHTML = completeContent;
 
