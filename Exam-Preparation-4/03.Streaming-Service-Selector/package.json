@@ -1,0 +1,16 @@
+{
+  "name": "03.streaming-service-selector",
+  "version": "1.0.0",
+  "main": "streamingServiceSelector.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "mocha Tests/streamingServiceSelector.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.6.0"
+  }
+}
