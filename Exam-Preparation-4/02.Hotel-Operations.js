@@ -39,16 +39,21 @@ class Hotel {
     return messages.join("\n");
   }
 
-  //   addRoomType(roomType, neededSupplies, pricePerNight) {
-  //     const messages = [];
-  //     neededSupplies.forEach((sup) => {
-  //         const [name, quantity] = sup.split(" ")
+  addRoomType(roomType, neededSupplies, pricePerNight) {
+    let roomExists = false;
+    if (!(roomType in this.roomAvailability)) {
+      this.roomAvailability[roomType] = [neededSupplies, pricePerNight];
+      roomExists = true;
+    }
 
-  //         if()
-
-  //         name in roomAvailability ? messages.push(`The ${roomType} is already available in our hotel, try something different.`) :
-  //     })
-  //   }
+    if (!roomExists) {
+      return `The ${roomType} is already available in our hotel, try something different.`;
+    } else {
+      return `Great idea! Now with the ${roomType}, we have ${
+        Object.keys(this.roomAvailability).length
+      } types of rooms available, any other ideas?`;
+    }
+  }
 
   showAvailableRooms() {
     if (Object.keys(this.roomAvailability).length === 0) {
@@ -56,9 +61,29 @@ class Hotel {
     } else {
       let message = [];
       for (const [k, v] of Object.entries(this.roomAvailability)) {
-        message.push(`${k} - $${v}`);
+        message.push(`${k} - $ ${v[1]}`);
       }
       return message.join("\n");
+    }
+  }
+
+  bookRoom(roomType) {
+    if (roomType in this.roomAvailability) {
+      const [neededSupplies, price] = this.roomAvailability[roomType];
+      for (const supply of neededSupplies) {
+        let [product, quantity] = supply.split(" ");
+        quantity = Number(quantity);
+
+        if (
+          !(product in this.supplyStock) ||
+          this.supplyStock[product] - quantity < 0
+        ) {
+          return `We are currently unable to accommodate your request for ${roomType}, sorry for the inconvenience.`;
+        }
+        return `Your booking for ${roomType} has been confirmed! The price is $${price} per night.`;
+      }
+    } else {
+      return `There is no ${roomType} available, would you like to book another room?`;
     }
   }
 }
@@ -69,4 +94,8 @@ console.log(
   hotel.restockSupplies(["Soap 100 50", "Towels 20 100", "Shampoo 50 75"])
 );
 
+console.log(hotel.addRoomType("Deluxe Suite", ["Soap 5", "Towels 2"], 200));
+console.log(hotel.addRoomType("Standard Room", ["Soap 2", "Towels 1"], 100));
 console.log(hotel.showAvailableRooms());
+console.log(hotel.bookRoom("Apartment"));
+console.log(hotel.bookRoom("Deluxe Suite"));
