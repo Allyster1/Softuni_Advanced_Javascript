@@ -1,0 +1,17 @@
+{
+  "name": "03-medical-checkup-resources",
+  "version": "1.0.0",
+  "main": "medicalCheckup.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha Tests/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.7.0"
+  }
+}
