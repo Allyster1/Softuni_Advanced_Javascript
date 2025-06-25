@@ -14,5 +14,8 @@ In the "JS Advanced" course, you will gain in-depth knowledge of the JavaScript 
 * Object-oriented programming
 * Functional programming
 
+## 📜 Certificate
+![JS Advanced](https://github.com/user-attachments/assets/08d7b06d-2507-41d1-9e82-93e48ebf9b8c)  
+
 ## 📚 Navigation
 > Next course: [**`JS Applications`**](https://github.com/Allyster1/JS-Applications)
